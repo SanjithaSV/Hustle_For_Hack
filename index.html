@@ -1,51 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Report System</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medical Reports, Simplified</title>
+    <style>
+        /* your existing styles unchanged until .container */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* rest of your CSS unchanged ... */
+        /* Paste all your CSS except the .upload-area and .upload-icon styles */
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sdg-tags {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .heart-icon {
+            color: #ef4444;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .publish-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+        }
+
+        .publish-btn:hover {
+            background: #4338ca;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1f2937 0%, #4f46e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .highlight {
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 0.875rem 2rem;
+            background: transparent;
+            color: #374151;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .medical-docs {
+            position: relative;
+            z-index: 2;
+        }    
+
+        .doc {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .doc:nth-child(2) {
+            transform: rotate(5deg);
+            margin-left: -1rem;
+        }
+
+        .doc:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .doc-line {
+            height: 4px;
+            background: #e5e7eb;
+            margin: 0.5rem 0;
+            border-radius: 2px;
+        }
+
+        .doc-line:first-child {
+            background: #10b981;
+            width: 60%;
+        }
+
+        .doc-line:nth-child(3) {
+            width: 80%;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+            color: #6b7280;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Removed upload-area styles */
+        @media (max-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+        }
+
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+    </style>
 </head>
 <body>
-    <h1>Medical Report System</h1>
-    
-    <!-- Form for Inserting a New Report -->
-    <h2>Insert New Report</h2>
-    <form action="/insert_report" method="POST">
-        <label for="patient_id">Patient ID:</label>
-        <input type="number" id="patient_id" name="patient_id" required><br><br>
+    <header class="header">
+        <div class="sdg-tags">
+            <span class="heart-icon">♥</span>
+            <span>SDG 3: Good Health • SDG 10: Reduced Inequalities</span>
+        </div>
+        <div class="nav-buttons">
+            <a href="#" class="nav-btn">Invite</a>
+            <a href="#" class="nav-btn">Upgrade</a>
+            <button class="nav-btn publish-btn">Publish</button>
+        </div>
+    </header>
 
-        <label for="report_text">Report Text:</label>
-        <textarea id="report_text" name="report_text" rows="5" required></textarea><br><br>
+    <div class="container">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Medical Reports, <span class="highlight">Simplified</span></h1>
+                <p>Transform complex medical test reports into clear, patient-friendly explanations. Understand your health with confidence and make informed decisions.</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="openModal()">📋 Get Started</button>
+                    <button class="btn-secondary" onclick="showDemo()">Learn More</button>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="medical-docs">
+                    <div class="doc">
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                    </div>
+                    <div class="doc">
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <label for="summary">Summary:</label>
-        <input type="text" id="summary" name="summary" required><br><br>
+        <section class="features">
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure</h3>
+                <p>HIPAA compliant data handling</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📄</div>
+                <h3>Simple</h3>
+                <p>Plain language explanations</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">👥</div>
+                <h3>Accessible</h3>
+                <p>Healthcare for everyone</p>
+            </div>
+        </section>
+    </div>
 
-        <label for="category">Category:</label>
-        <input type="text" id="category" name="category" required><br><br>
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Get Started with Medical Reports Simplified</h2>
+            <p>Ready to transform your medical reports? Upload your document and get clear, understandable explanations in minutes.</p>
+            <br>
+            <button class="btn-primary" style="width: 100%;" onclick="handleUpload()">Choose File to Upload</button>
+        </div>
+    </div>
 
-        <label for="prediction">Prediction:</label>
-        <input type="text" id="prediction" name="prediction" required><br><br>
+    <script>
+        function openModal() {
+            document.getElementById('modal').style.display = 'block';
+        }
 
-        <button type="submit">Insert Report</button>
-    </form>
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
 
-    <hr>
+        function showDemo() {
+            alert('Demo: This would show a sample medical report transformation, highlighting how complex medical jargon is simplified into patient-friendly language.');
+        }
 
-    <!-- Form for Predicting Report Category -->
-    <h2>Predict Report Category</h2>
-    <form action="/predict" method="POST">
-        <label for="report_text">Enter Report Text:</label><br>
-        <textarea id="report_text" name="report_text" rows="5" required></textarea><br><br>
+        function handleUpload() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.pdf,.jpg,.jpeg,.png';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    alert(`Processing ${file.name}...\n\nThis would analyze your medical report and provide:\n• Plain language summary\n• Key findings highlighted\n• Next steps recommendations\n• Questions to ask your doctor`);
+                }
+            };
+            input.click();
+            closeModal();
+        }
 
-        <button type="submit">Predict Category</button>
-    </form>
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
 
-    {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
-    
-    {% if prediction %}
-        <h3>Prediction: {{ prediction }}</h3>
-    {% endif %}
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            features.forEach((feature, index) => {
+                feature.style.animationDelay = `${index * 0.2}s`;
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    feature.style.transition = 'all 0.6s ease';
+                    feature.style.opacity = '1';
+                    feature.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
 </body>
 </html>
