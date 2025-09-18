@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Report System</title>
+</head>
+<body>
+    <h1>Medical Report System</h1>
+    
+    <!-- Form for Inserting a New Report -->
+    <h2>Insert New Report</h2>
+    <form action="/insert_report" method="POST">
+        <label for="patient_id">Patient ID:</label>
+        <input type="number" id="patient_id" name="patient_id" required><br><br>
+
+        <label for="report_text">Report Text:</label>
+        <textarea id="report_text" name="report_text" rows="5" required></textarea><br><br>
+
+        <label for="summary">Summary:</label>
+        <input type="text" id="summary" name="summary" required><br><br>
+
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required><br><br>
+
+        <label for="prediction">Prediction:</label>
+        <input type="text" id="prediction" name="prediction" required><br><br>
+
+        <button type="submit">Insert Report</button>
+    </form>
+
+    <hr>
+
+    <!-- Form for Predicting Report Category -->
+    <h2>Predict Report Category</h2>
+    <form action="/predict" method="POST">
+        <label for="report_text">Enter Report Text:</label><br>
+        <textarea id="report_text" name="report_text" rows="5" required></textarea><br><br>
+
+        <button type="submit">Predict Category</button>
+    </form>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    
+    {% if prediction %}
+        <h3>Prediction: {{ prediction }}</h3>
+    {% endif %}
+</body>
+</html>
