@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Medical Reports, Simplified</title>
     <style>
-        /* your existing styles unchanged until .container */
         * {
             margin: 0;
             padding: 0;
@@ -18,9 +17,6 @@
             min-height: 100vh;
         }
 
-        /* rest of your CSS unchanged ... */
-        /* Paste all your CSS except the .upload-area and .upload-icon styles */
-        
         .header {
             display: flex;
             justify-content: space-between;
@@ -57,6 +53,7 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .nav-btn:hover {
@@ -226,7 +223,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
+            margin-bottom: 4rem;
         }
 
         .feature {
@@ -270,9 +267,153 @@
             line-height: 1.5;
         }
 
-        /* Removed upload-area styles */
+        /* New styles for system functionality */
+        .system-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .system-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .system-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .system-card h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .result-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .prediction-result {
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 1px solid #10b981;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+
+        .prediction-result h3 {
+            color: #065f46;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
         @media (max-width: 768px) {
-            .hero-section {
+            .hero-section,
+            .system-section {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
@@ -289,42 +430,6 @@
                 flex-direction: column;
             }
         }
-
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-        }
-
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-        }
-
-
-        .close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #6b7280;
-        }
     </style>
 </head>
 <body>
@@ -334,6 +439,7 @@
             <span>SDG 3: Good Health • SDG 10: Reduced Inequalities</span>
         </div>
         <div class="nav-buttons">
+            <button class="nav-btn" onclick="scrollToSystem()">System</button>
             <a href="#" class="nav-btn">Invite</a>
             <a href="#" class="nav-btn">Upgrade</a>
             <button class="nav-btn publish-btn">Publish</button>
@@ -346,7 +452,7 @@
                 <h1>Medical Reports, <span class="highlight">Simplified</span></h1>
                 <p>Transform complex medical test reports into clear, patient-friendly explanations. Understand your health with confidence and make informed decisions.</p>
                 <div class="cta-buttons">
-                    <button class="btn-primary" onclick="openModal()">📋 Get Started</button>
+                    <button class="btn-primary" onclick="scrollToSystem()">📋 Get Started</button>
                     <button class="btn-secondary" onclick="showDemo()">Learn More</button>
                 </div>
             </div>
@@ -385,20 +491,78 @@
                 <p>Healthcare for everyone</p>
             </div>
         </section>
+
+        <section id="system-section" class="system-section">
+            <!-- Insert New Report Form -->
+            <div class="system-card">
+                <h2>📝 Insert New Report</h2>
+                <form action="/insert_report" method="POST" onsubmit="handleInsertSubmit(event)">
+                    <div class="form-group">
+                        <label for="patient_id">Patient ID:</label>
+                        <input type="number" id="patient_id" name="patient_id" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="report_text_insert">Report Text:</label>
+                        <textarea id="report_text_insert" name="report_text" required placeholder="Enter the complete medical report text here..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Insert Report</button>
+                </form>
+
+                <div id="insert-message" class="result-message" style="display: none;"></div>
+            </div>
+
+            <!-- Predict Report Category Form -->
+            <div class="system-card">
+                <h2>🔍 Predict Report Category</h2>
+                <form action="/predict" method="POST" onsubmit="handlePredictSubmit(event)">
+                    <div class="form-group">
+                        <label for="report_text_predict">Enter Report Text:</label>
+                        <textarea id="report_text_predict" name="report_text" required placeholder="Paste your medical report text here for category prediction..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Predict Category</button>
+                </form>
+
+                <div id="predict-message" class="result-message" style="display: none;"></div>
+                <div id="prediction-result" class="prediction-result" style="display: none;">
+                    <h3>Prediction Result:</h3>
+                    <p id="prediction-text"></p>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Get Started with Medical Reports Simplified</h2>
-            <p>Ready to transform your medical reports? Upload your document and get clear, understandable explanations in minutes.</p>
+            <h2>Get Started with Medical Reports</h2>
+            <p>Choose how you'd like to proceed with your medical report analysis:</p>
             <br>
-            <button class="btn-primary" style="width: 100%;" onclick="handleUpload()">Choose File to Upload</button>
+            <button class="btn-primary" style="width: 100%; margin-bottom: 1rem;" onclick="scrollToInsert()">Insert New Report</button>
+            <button class="btn-secondary" style="width: 100%;" onclick="scrollToPredict()">Predict Category</button>
         </div>
     </div>
 
     <script>
+        function scrollToSystem() {
+            document.getElementById('system-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToInsert() {
+            closeModal();
+            document.querySelector('.system-card:first-child').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('patient_id').focus();
+        }
+
+        function scrollToPredict() {
+            closeModal();
+            document.querySelector('.system-card:last-child').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('report_text_predict').focus();
+        }
+
         function openModal() {
             document.getElementById('modal').style.display = 'block';
         }
@@ -408,21 +572,53 @@
         }
 
         function showDemo() {
-            alert('Demo: This would show a sample medical report transformation, highlighting how complex medical jargon is simplified into patient-friendly language.');
+            alert('Demo: This would show a sample medical report transformation, highlighting how complex medical jargon is simplified into patient-friendly language with category predictions.');
         }
 
-        function handleUpload() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.pdf,.jpg,.jpeg,.png';
-            input.onchange = function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    alert(`Processing ${file.name}...\n\nThis would analyze your medical report and provide:\n• Plain language summary\n• Key findings highlighted\n• Next steps recommendations\n• Questions to ask your doctor`);
-                }
-            };
-            input.click();
-            closeModal();
+        function handleInsertSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const patientId = formData.get('patient_id');
+            const reportText = formData.get('report_text');
+            
+            // Simulate successful insertion
+            const messageDiv = document.getElementById('insert-message');
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = `✅ Successfully inserted report for Patient ID: ${patientId}. Report contains ${reportText.length} characters.`;
+            
+            // Clear form
+            event.target.reset();
+            
+            // Auto-hide message after 5 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function handlePredictSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const reportText = formData.get('report_text');
+            
+            // Simulate prediction logic
+            const predictions = ['Cardiology', 'Neurology', 'Oncology', 'Radiology', 'Laboratory', 'Pathology'];
+            const randomPrediction = predictions[Math.floor(Math.random() * predictions.length)];
+            
+            // Show prediction result
+            const messageDiv = document.getElementById('predict-message');
+            const resultDiv = document.getElementById('prediction-result');
+            const predictionText = document.getElementById('prediction-text');
+            
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = `📊 Analysis complete! Report processed (${reportText.length} characters analyzed).`;
+            
+            resultDiv.style.display = 'block';
+            predictionText.innerHTML = `<strong>${randomPrediction}</strong><br><small>Confidence: ${(Math.random() * 20 + 80).toFixed(1)}%</small>`;
+            
+            // Auto-hide message after 7 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 7000);
         }
 
         window.onclick = function(event) {
@@ -444,6 +640,946 @@
                     feature.style.opacity = '1';
                     feature.style.transform = 'translateY(0)';
                 }, index * 200);
+            });
+
+            // Animate system cards on scroll
+            const systemCards = document.querySelectorAll('.system-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    }
+                });
+            });
+
+            systemCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medical Reports, Simplified</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sdg-tags {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .heart-icon {
+            color: #ef4444;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .publish-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+        }
+
+        .publish-btn:hover {
+            background: #4338ca;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1f2937 0%, #4f46e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .highlight {
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 0.875rem 2rem;
+            background: transparent;
+            color: #374151;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .medical-docs {
+            position: relative;
+            z-index: 2;
+        }    
+
+        .doc {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .doc:nth-child(2) {
+            transform: rotate(5deg);
+            margin-left: -1rem;
+        }
+
+        .doc:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .doc-line {
+            height: 4px;
+            background: #e5e7eb;
+            margin: 0.5rem 0;
+            border-radius: 2px;
+        }
+
+        .doc-line:first-child {
+            background: #10b981;
+            width: 60%;
+        }
+
+        .doc-line:nth-child(3) {
+            width: 80%;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+            color: #6b7280;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* New styles for system functionality */
+        .system-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .system-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .system-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .system-card h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .result-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .prediction-result {
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 1px solid #10b981;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+
+        .analysis-results {
+            margin-top: 1.5rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #0ea5e9;
+            border-radius: 12px;
+            border-left: 4px solid #0ea5e9;
+        }
+
+        .analysis-results h3 {
+            color: #0c4a6e;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-section {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .analysis-section h4 {
+            color: #1f2937;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .analysis-section p, 
+        .analysis-section ul {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .analysis-section ul {
+            padding-left: 1.5rem;
+        }
+
+        .analysis-section li {
+            margin-bottom: 0.25rem;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .severity-normal {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .severity-attention {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .severity-urgent {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section,
+            .system-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="sdg-tags">
+            <span class="heart-icon">♥</span>
+            <span>SDG 3: Good Health • SDG 10: Reduced Inequalities</span>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="scrollToSystem()">System</button>
+            <a href="#" class="nav-btn">Invite</a>
+            <a href="#" class="nav-btn">Upgrade</a>
+            <button class="nav-btn publish-btn">Publish</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Medical Reports, <span class="highlight">Simplified</span></h1>
+                <p>Transform complex medical test reports into clear, patient-friendly explanations. Understand your health with confidence and make informed decisions.</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="scrollToSystem()">📋 Get Started</button>
+                    <button class="btn-secondary" onclick="showDemo()">Learn More</button>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="medical-docs">
+                    <div class="doc">
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                    </div>
+                    <div class="doc">
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                        <div class="doc-line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure</h3>
+                <p>HIPAA compliant data handling</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📄</div>
+                <h3>Simple</h3>
+                <p>Plain language explanations</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">👥</div>
+                <h3>Accessible</h3>
+                <p>Healthcare for everyone</p>
+            </div>
+        </section>
+
+        <section id="system-section" class="system-section">
+            <!-- Insert New Report Form -->
+            <div class="system-card">
+                <h2>📝 Insert New Report</h2>
+                <form action="/insert_report" method="POST" onsubmit="handleInsertSubmit(event)">
+                    <div class="form-group">
+                        <label for="patient_id">Patient ID:</label>
+                        <input type="number" id="patient_id" name="patient_id" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="report_text_insert">Report Text:</label>
+                        <textarea id="report_text_insert" name="report_text" required placeholder="Enter the complete medical report text here..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Insert Report</button>
+                </form>
+
+                <div id="insert-message" class="result-message" style="display: none;"></div>
+                
+                <!-- Analysis Results Section -->
+                <div id="analysis-results" class="analysis-results" style="display: none;">
+                    <h3>📊 Report Analysis Summary</h3>
+                    <div id="analysis-content"></div>
+                </div>
+            </div>
+
+            <!-- Predict Report Category Form -->
+            <div class="system-card">
+                <h2>🔍 Predict Report Category</h2>
+                <form action="/predict" method="POST" onsubmit="handlePredictSubmit(event)">
+                    <div class="form-group">
+                        <label for="report_text_predict">Enter Report Text:</label>
+                        <textarea id="report_text_predict" name="report_text" required placeholder="Paste your medical report text here for category prediction..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Predict Category</button>
+                </form>
+
+                <div id="predict-message" class="result-message" style="display: none;"></div>
+                <div id="prediction-result" class="prediction-result" style="display: none;">
+                    <h3>Prediction Result:</h3>
+                    <p id="prediction-text"></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Get Started with Medical Reports</h2>
+            <p>Choose how you'd like to proceed with your medical report analysis:</p>
+            <br>
+            <button class="btn-primary" style="width: 100%; margin-bottom: 1rem;" onclick="scrollToInsert()">Insert New Report</button>
+            <button class="btn-secondary" style="width: 100%;" onclick="scrollToPredict()">Predict Category</button>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSystem() {
+            document.getElementById('system-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToInsert() {
+            closeModal();
+            document.querySelector('.system-card:first-child').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('patient_id').focus();
+        }
+
+        function scrollToPredict() {
+            closeModal();
+            document.querySelector('.system-card:last-child').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('report_text_predict').focus();
+        }
+
+        function openModal() {
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function showDemo() {
+            alert('Demo: This would show a sample medical report transformation, highlighting how complex medical jargon is simplified into patient-friendly language with category predictions.');
+        }
+
+        function handleInsertSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const patientId = formData.get('patient_id');
+            const reportText = formData.get('report_text');
+            
+            // Show processing message
+            const messageDiv = document.getElementById('insert-message');
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = `🔄 Processing report for Patient ID: ${patientId}...`;
+            
+            // Simulate analysis delay
+            setTimeout(() => {
+                // Generate analysis summary
+                const analysis = analyzeReport(reportText);
+                
+                messageDiv.innerHTML = `✅ Successfully inserted and analyzed report for Patient ID: ${patientId}`;
+                
+                // Show analysis results
+                showAnalysisResults(analysis, patientId);
+                
+                // Clear form
+                event.target.reset();
+                
+                // Auto-hide message after 10 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 10000);
+            }, 2000);
+        }
+
+        function analyzeReport(reportText) {
+            // Simulate AI-powered medical report analysis
+            const text = reportText.toLowerCase();
+            
+            // Determine report type
+            let reportType = 'General Medical Report';
+            if (text.includes('blood') || text.includes('glucose') || text.includes('cholesterol')) {
+                reportType = 'Blood Test Results';
+            } else if (text.includes('x-ray') || text.includes('mri') || text.includes('ct scan')) {
+                reportType = 'Imaging Report';
+            } else if (text.includes('ecg') || text.includes('ekg') || text.includes('heart')) {
+                reportType = 'Cardiac Report';
+            } else if (text.includes('biopsy') || text.includes('pathology')) {
+                reportType = 'Pathology Report';
+            }
+            
+            // Generate key findings based on common medical terms
+            const keyFindings = generateKeyFindings(text);
+            
+            // Determine overall severity
+            const severity = determineSeverity(text);
+            
+            // Generate recommendations
+            const recommendations = generateRecommendations(text, severity);
+            
+            return {
+                reportType,
+                keyFindings,
+                severity,
+                recommendations,
+                plainLanguage: generatePlainLanguageExplanation(text, reportType)
+            };
+        }
+        
+        function generateKeyFindings(text) {
+            const findings = [];
+            
+            if (text.includes('normal') || text.includes('within normal limits')) {
+                findings.push('Most test results are within normal ranges');
+            }
+            if (text.includes('elevated') || text.includes('high')) {
+                findings.push('Some values are higher than normal');
+            }
+            if (text.includes('low') || text.includes('decreased')) {
+                findings.push('Some values are lower than normal');
+            }
+            if (text.includes('abnormal') || text.includes('irregular')) {
+                findings.push('Some abnormal findings detected');
+            }
+            if (text.includes('inflammation') || text.includes('infection')) {
+                findings.push('Signs of inflammation or infection present');
+            }
+            
+            return findings.length > 0 ? findings : ['Report contains detailed medical information for review'];
+        }
+        
+        function determineSeverity(text) {
+            if (text.includes('urgent') || text.includes('critical') || text.includes('immediate')) {
+                return { level: 'urgent', label: 'Requires Immediate Attention' };
+            } else if (text.includes('abnormal') || text.includes('elevated') || text.includes('concern')) {
+                return { level: 'attention', label: 'Needs Follow-up' };
+            } else {
+                return { level: 'normal', label: 'Routine Results' };
+            }
+        }
+        
+        function generateRecommendations(text, severity) {
+            const recommendations = [];
+            
+            if (severity.level === 'urgent') {
+                recommendations.push('Contact your healthcare provider immediately');
+                recommendations.push('Do not delay seeking medical attention');
+            } else if (severity.level === 'attention') {
+                recommendations.push('Schedule a follow-up appointment with your doctor');
+                recommendations.push('Discuss these results during your next visit');
+            } else {
+                recommendations.push('Continue with routine healthcare monitoring');
+                recommendations.push('Maintain healthy lifestyle habits');
+            }
+            
+            if (text.includes('cholesterol') || text.includes('lipid')) {
+                recommendations.push('Consider dietary changes and exercise');
+            }
+            if (text.includes('glucose') || text.includes('diabetes')) {
+                recommendations.push('Monitor blood sugar levels regularly');
+            }
+            if (text.includes('blood pressure') || text.includes('hypertension')) {
+                recommendations.push('Monitor blood pressure at home');
+            }
+            
+            return recommendations;
+        }
+        
+        function generatePlainLanguageExplanation(text, reportType) {
+            let explanation = '';
+            
+            switch (reportType) {
+                case 'Blood Test Results':
+                    explanation = 'This blood test checks various substances in your blood to assess your overall health. ';
+                    break;
+                case 'Imaging Report':
+                    explanation = 'This imaging study takes pictures of the inside of your body to look for any problems. ';
+                    break;
+                case 'Cardiac Report':
+                    explanation = 'This test examines how well your heart is working and its electrical activity. ';
+                    break;
+                case 'Pathology Report':
+                    explanation = 'This report examines tissue samples under a microscope to look for diseases. ';
+                    break;
+                default:
+                    explanation = 'This medical report contains important information about your health status. ';
+            }
+            
+            explanation += 'The results help your doctor understand your current health condition and plan the best care for you.';
+            
+            return explanation;
+        }
+        
+        function showAnalysisResults(analysis, patientId) {
+            const resultsDiv = document.getElementById('analysis-results');
+            const contentDiv = document.getElementById('analysis-content');
+            
+            const severityClass = `severity-${analysis.severity.level}`;
+            
+            contentDiv.innerHTML = `
+                <div class="analysis-section">
+                    <h4>📋 Report Type</h4>
+                    <p><strong>${analysis.reportType}</strong> for Patient ID: ${patientId}</p>
+                </div>
+                
+                <div class="analysis-section">
+                    <h4>🎯 What This Means</h4>
+                    <p>${analysis.plainLanguage}</p>
+                </div>
+                
+                <div class="analysis-section">
+                    <h4>🔍 Key Findings</h4>
+                    <ul>
+                        ${analysis.keyFindings.map(finding => `<li>${finding}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="analysis-section">
+                    <h4>⚡ Priority Level</h4>
+                    <p><span class="severity-badge ${severityClass}">${analysis.severity.label}</span></p>
+                </div>
+                
+                <div class="analysis-section">
+                    <h4>💡 Recommendations</h4>
+                    <ul>
+                        ${analysis.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="analysis-section">
+                    <h4>❓ Questions to Ask Your Doctor</h4>
+                    <ul>
+                        <li>What do these results mean for my overall health?</li>
+                        <li>Are there any lifestyle changes I should make?</li>
+                        <li>When should I schedule my next appointment?</li>
+                        <li>Are there any symptoms I should watch for?</li>
+                    </ul>
+                </div>
+            `;
+            
+            resultsDiv.style.display = 'block';
+            
+            // Smooth scroll to results
+            setTimeout(() => {
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 500);
+        }
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const reportText = formData.get('report_text');
+            
+            // Simulate prediction logic
+            const predictions = ['Cardiology', 'Neurology', 'Oncology', 'Radiology', 'Laboratory', 'Pathology'];
+            const randomPrediction = predictions[Math.floor(Math.random() * predictions.length)];
+            
+            // Show prediction result
+            const messageDiv = document.getElementById('predict-message');
+            const resultDiv = document.getElementById('prediction-result');
+            const predictionText = document.getElementById('prediction-text');
+            
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = `📊 Analysis complete! Report processed (${reportText.length} characters analyzed).`;
+            
+            resultDiv.style.display = 'block';
+            predictionText.innerHTML = `<strong>${randomPrediction}</strong><br><small>Confidence: ${(Math.random() * 20 + 80).toFixed(1)}%</small>`;
+            
+            // Auto-hide message after 7 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 7000);
+        
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            features.forEach((feature, index) => {
+                feature.style.animationDelay = `${index * 0.2}s`;
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    feature.style.transition = 'all 0.6s ease';
+                    feature.style.opacity = '1';
+                    feature.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+
+            // Animate system cards on scroll
+            const systemCards = document.querySelectorAll('.system-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    }
+                });
+            });
+
+            systemCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
             });
         });
     </script>
